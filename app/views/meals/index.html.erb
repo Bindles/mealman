@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <h1 class="text-center">Meal Suggester</h1>
+
+  <%= form_with url: meals_suggest_path, method: :post, local: true do |form| %>
+    <div class="mb-3">
+      <%= form.label :ingredients, "Enter up to 2 ingredients:" %>
+      <%= text_field_tag "ingredients[]", nil, class: "form-control", placeholder: "Ingredient 1" %>
+      <%= text_field_tag "ingredients[]", nil, class: "form-control mt-2", placeholder: "Ingredient 2" %>
+    </div>
+    <%= form.submit "Suggest Meals", class: "btn btn-primary" %>
+  <% end %>
+
+  <% if @suggestions %>
+    <div class="mt-4">
+      <h2>Meal Suggestions:</h2>
+      <ul class="list-group">
+        <% @suggestions.each do |suggestion| %>
+          <li class="list-group-item"><%= suggestion %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<div id="suggestions"></div>
+  <h3>Suggestions will appear here...</h3>
+</div>
+
+<%#% form_with url: meals_suggest_path, method: :post, data: { turbo_stream: true } do |f| %>
